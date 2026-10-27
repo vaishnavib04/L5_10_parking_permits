@@ -1,5 +1,5 @@
 **Name:** Vaishnavi Bandaru  
-**SRN:** PES2UG24CS570 
+**SRN:** PES2UG24CS570  
 **Course:** Software Engineering  
 **Lab:** Lab 5 – Static Analysis  
 **Repository:** L5_10_parking_permits
