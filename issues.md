@@ -1,44 +1,33 @@
-\# Static Analysis Issue Documentation
+# Static Analysis Issue Documentation
 
+## 1. Overview
 
+The parking permit management program was analyzed using Pylint, Bandit, and Flake8. These tools were used to identify code-quality problems, potential security risks, and Python style violations. The findings were addressed, and the tools were run again to verify the corrections.
 
-\## Overview
-
-
-
-The parking permit management program was analyzed using Pylint, Bandit, and Flake8. The findings were addressed to improve code quality, security, error handling, and consistency.
-
-
-
-\## Issue Documentation Table
-
-
+## 2. Issue Documentation Table
 
 | No. | Issue Identified | Tool | Correction Applied | Outcome |
-
 |---|---|---|---|---|
+| 1 | Missing module and function docstrings. | Pylint | Added descriptive documentation to the module and functions. | Improved code documentation and readability. |
+| 2 | Mutable default argument in `register_permit()`. | Pylint | Changed the default argument to `None` and initialized the list inside the function. | Avoided sharing a mutable default list between calls. |
+| 3 | Bare `except` clauses. | Pylint and Flake8 | Replaced bare exception handlers with appropriate specific exception types. | Improved error handling and removed the reported violations. |
+| 4 | Permit numbers generated using `random.randint()`. | Bandit | Replaced the `random` module with `secrets` for generating permit numbers. | Eliminated the B311 security warning. |
+| 5 | Lines exceeding the permitted line length. | Pylint and Flake8 | Split long statements across multiple lines. | Removed the reported line-length violations. |
+| 6 | Incorrect blank-line spacing around functions. | Flake8 | Corrected blank-line spacing to follow Python style conventions. | Removed the reported spacing violations. |
+| 7 | Function name `setExpiry` did not follow the recommended naming convention. | Pylint | Renamed the function to `set_expiry`. | Followed the recommended snake_case naming convention. |
+| 8 | File operations lacked explicit encoding and appropriate resource management. | Pylint | Specified UTF-8 encoding and used context managers for file operations. | Improved file handling and resource management. |
+| 9 | Use of a global statement. | Pylint | Refactored the relevant code to avoid an unnecessary global statement. | Improved code organization. |
 
-| 1 | Insufficient code documentation and code quality issues. | Pylint | Added appropriate module, function, and variable documentation and improved code structure. | Pylint score improved to 10.00/10. |
+## 3. Before-and-After Results
 
-| 2 | Broad exception handling could hide unexpected errors. | Pylint / Flake8 | Replaced bare exception handling with specific exception types where appropriate. | Improved error handling and code readability. |
+| Tool | Before Correction | After Correction |
+|---|---|---|
+| Pylint | Score: 6.32/10 | Score: 10.00/10 |
+| Bandit | One low-severity B311 finding | No issues identified |
+| Flake8 | 16 reported violations | No reported violations |
 
-| 3 | Use of the standard `random` module for generating permit numbers triggered a security warning. | Bandit | Replaced `random` with the `secrets` module for generating permit numbers. | Bandit reported no issues after the correction. |
+## 4. Summary
 
-| 4 | Functions did not follow the required blank-line spacing conventions. | Flake8 | Corrected spacing between functions and after function definitions. | No Flake8 violations remained. |
+Pylint helped identify maintainability and code-quality issues, Bandit identified the use of an unsuitable random number generator for security-sensitive permit number generation, and Flake8 identified formatting and style violations.
 
-| 5 | Some lines exceeded the recommended maximum line length. | Flake8 | Split long statements across multiple lines. | Improved readability and eliminated line-length violations. |
-
-| 6 | Bare `except` clauses violated Python style guidelines. | Flake8 | Replaced bare exception handling with specific exception types. | Eliminated the reported bare-except violations. |
-
-
-
-\## Summary
-
-
-
-The program was analyzed using three static analysis tools. Pylint was used to assess code quality, Bandit to identify potential security problems, and Flake8 to identify style violations.
-
-
-
-The corrected program achieved a Pylint score of 10.00/10, Bandit reported no issues, and Flake8 reported no remaining violations.
-
+After the corrections, the program achieved a Pylint score of 10.00/10, Bandit reported no issues, and Flake8 reported no remaining violations. The before-and-after reports provide evidence of the analysis and improvements.
